@@ -13,10 +13,10 @@ export const productCategories: ProductCategory[] = [
     item("konserve-agda", "Konserve Ağda", "M&Y Kozmetik", "/products/my-konserve-agda-azulen.png"),
   ] },
   { slug: "agda-ekipmanlari", name: "Ağda Ekipmanları", description: "Ağda uygulamalarını tamamlayan profesyonel ekipman ve yardımcı ürünler.", products: [
-    item("agda-yagi", "Ağda Yağı", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Oil_bottle_clip_art.png"),
+    item("agda-yagi", "Ağda Yağı", "Genel", "/products/replacements/agda-yagi.webp"),
     item("spatula", "Spatula", "Genel", "/products/spatula.jpg"),
     item("agda-bezi", "Ağda Bezi", "Genel", "/products/agda-bezi.webp"),
-    item("agda-makinesi", "Ağda Makinesi", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Waxing_Studio_-_panoramio.jpg"),
+    item("agda-makinesi", "Ağda Makinesi", "Genel", "https://africaproducts.nl/cdn/shop/products/7222.jpg?v=1613226081"),
   ] },
   { slug: "oksidan", name: "Oksidan", description: "Kuaf Professional markalı, profesyonel saç işlemleri için oksidanlar.", products: [
     item("kuaf-professional-10-vol-5l", "10 Vol 5L", "Kuaf Professional", "/products/kuaf-oksidan-10-vol.jpg"),
@@ -26,15 +26,15 @@ export const productCategories: ProductCategory[] = [
   ] },
   { slug: "tek-kullanimlik", name: "Tek Kullanımlık", description: "Hijyenik salon kullanımı için tek kullanımlık ürünler.", products: [
     item("sedye-ortusu", "Sedye Örtüsü", "Genel", "https://c.shld.net/rpx/i/s/pi/mp/9150/prod_11143874902?d=d2d9be9ff9b7a39f1de5ebf666fd57a387e3b082&hei=1000&src=https%3A%2F%2Fimages-na.ssl-images-amazon.com%2Fimages%2FI%2F31swx9mNI5L.jpg&wid=1000"),
-    item("tek-kullanimlik-eldiven", "Tek Kullanımlık Eldiven", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Disposable_gloves_05.JPG"),
-    item("tek-kullanimlik-onluk", "Tek Kullanımlık Önlük", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Apron_MET_1991.385.1.jpg"),
+    item("tek-kullanimlik-eldiven", "Tek Kullanımlık Eldiven", "Genel", "https://s.alicdn.com/@sc04/kf/Hee3b394b1f474be189f3816707537b97i/Blue-Vinyl-Glovee-Wholesale-CE-Approval-Popular-in-Beauty-Salon-Disposable-PVC-Glovee-Powder-Free.jpg"),
+    item("tek-kullanimlik-onluk", "Tek Kullanımlık Önlük", "Genel", "/products/replacements/tek-kullanimlik-onluk.jpg"),
   ] },
   { slug: "guzellik-urunleri", name: "Güzellik Ürünleri", description: "Manikür, pedikür ve bakım uygulamaları için profesyonel ürünler.", products: [
-    item("manikur-seti", "Manikür Seti", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Set%2C_manicure_%2851360554084%29.jpg"),
-    item("pedikur-seti", "Pedikür Seti", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pedicure_1.jpg"),
+    item("manikur-seti", "Manikür Seti", "Genel", "/products/replacements/manikur-seti.jpeg"),
+    item("pedikur-seti", "Pedikür Seti", "Genel", "/products/replacements/pedikur-seti.webp"),
     item("torpu", "Törpü", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Glass_nail_file.jpg"),
-    item("cimbiz", "Cımbız", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Two_tweezers.png"),
-    item("kas-ipi", "Kaş İpi", "Genel", "https://commons.wikimedia.org/wiki/Special:Redirect/file/Eyebrow_threading.jpg"),
+    item("cimbiz", "Cımbız", "Genel", "/products/replacements/cimbiz.webp"),
+    item("kas-ipi", "Kaş İpi", "Genel", "https://live.staticflickr.com/2074/1502808309_d5070fdc2a_o.jpg"),
   ] },
 ];
 
