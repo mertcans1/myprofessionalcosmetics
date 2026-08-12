@@ -12,12 +12,35 @@ import {
   Phone,
   Menu,
   X,
+  Search,
+  ArrowUpRight,
 } from "lucide-react";
 import { siWhatsapp } from "simple-icons";
+import { productCategories } from "@/lib/products";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const normalizedSearchQuery = searchQuery.trim().toLocaleLowerCase("tr-TR");
+
+  const searchResults = normalizedSearchQuery
+    ? productCategories.flatMap((category) =>
+        category.products
+          .filter((product) =>
+            [product.name, product.brand, category.name, product.slug].some((value) =>
+              value.toLocaleLowerCase("tr-TR").includes(normalizedSearchQuery)
+            )
+          )
+          .map((product) => ({
+            ...product,
+            categorySlug: category.slug,
+            categoryName: category.name,
+          }))
+      )
+    : [];
+
+  const clearSearch = () => setSearchQuery("");
 
   const menuItems = [
     {
@@ -94,28 +117,92 @@ export default function Navbar() {
 
           {/* MASAÜSTÜ MENÜ */}
 
-          <nav className="hidden lg:flex items-center gap-7">
-            {menuItems.map((item) => {
-              const Icon = item.icon;
-              const active = isActive(item.href);
+          <div className="hidden lg:flex items-center gap-5">
+            <nav className="flex items-center gap-6 xl:gap-7">
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center gap-2 text-sm transition-colors duration-300 ${
-                    active
-                      ? "text-[#D4AF37]"
-                      : "text-zinc-300 hover:text-[#D4AF37]"
-                  }`}
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`flex items-center gap-2 text-sm transition-colors duration-300 ${
+                      active
+                        ? "text-[#D4AF37]"
+                        : "text-zinc-300 hover:text-[#D4AF37]"
+                    }`}
+                  >
+                    <Icon size={16} strokeWidth={1.8} />
+
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* ÜST MENÜ ÜRÜN ARAMA */}
+
+            <div className="relative w-[220px] xl:w-[250px]">
+              <Search
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500"
+                size={17}
+                strokeWidth={1.8}
+              />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Ürün ara..."
+                aria-label="Ürün ara"
+                className="h-10 w-full rounded-full border border-white/10 bg-white/[0.035] pl-10 pr-9 text-sm text-white placeholder:text-zinc-600 outline-none transition focus:border-[#D4AF37]/50 focus:bg-white/[0.06]"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  aria-label="Aramayı temizle"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-[#D4AF37]"
                 >
-                  <Icon size={16} strokeWidth={1.8} />
+                  <X size={14} />
+                </button>
+              )}
 
-                  <span>{item.name}</span>
-                </Link>
-              );
-            })}
-          </nav>
+              {searchQuery && (
+                <div className="absolute right-0 top-12 z-[80] w-[310px] overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0b] shadow-2xl">
+                  <div className="border-b border-white/5 px-4 py-2.5 text-[10px] tracking-[2px] text-zinc-600 uppercase">
+                    {searchResults.length} sonuç
+                  </div>
+                  {searchResults.length === 0 ? (
+                    <p className="px-4 py-5 text-sm text-zinc-500">
+                      “{searchQuery}” için ürün bulunamadı.
+                    </p>
+                  ) : (
+                    <div className="max-h-[300px] overflow-y-auto">
+                      {searchResults.map((product) => (
+                        <Link
+                          key={`${product.categorySlug}-${product.slug}`}
+                          href={`/urunler/${product.categorySlug}/${product.slug}`}
+                          className="group flex items-center justify-between gap-3 border-b border-white/5 px-4 py-3.5 transition last:border-none hover:bg-white/[0.04]"
+                        >
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold text-white">{product.name}</p>
+                            <p className="mt-1 truncate text-xs text-zinc-500">
+                              {product.categoryName}
+                            </p>
+                          </div>
+                          <ArrowUpRight
+                            className="shrink-0 text-[#D4AF37] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                            size={16}
+                          />
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
 
           {/* MASAÜSTÜ WHATSAPP */}
 
@@ -159,6 +246,63 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed top-24 left-0 w-full z-[60] lg:hidden">
           <div className="bg-[#090909] border-t border-white/10 shadow-2xl px-5 py-5">
+            {/* MOBİL ÜRÜN ARAMA */}
+            <div className="relative mb-4">
+              <Search
+                className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
+                size={18}
+                strokeWidth={1.8}
+              />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Ürün ara..."
+                aria-label="Ürün ara"
+                className="h-12 w-full rounded-2xl border border-white/10 bg-white/[0.035] pl-11 pr-10 text-sm text-white placeholder:text-zinc-600 outline-none transition focus:border-[#D4AF37]/50"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  aria-label="Aramayı temizle"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-[#D4AF37]"
+                >
+                  <X size={16} />
+                </button>
+              )}
+
+              {searchQuery && (
+                <div className="mt-2 overflow-hidden rounded-2xl border border-white/10 bg-[#0b0b0b] shadow-xl">
+                  <div className="border-b border-white/5 px-4 py-2.5 text-[10px] tracking-[2px] text-zinc-600 uppercase">
+                    {searchResults.length} sonuç
+                  </div>
+                  {searchResults.length === 0 ? (
+                    <p className="px-4 py-5 text-sm text-zinc-500">
+                      “{searchQuery}” için ürün bulunamadı.
+                    </p>
+                  ) : (
+                    <div className="max-h-[260px] overflow-y-auto">
+                      {searchResults.map((product) => (
+                        <Link
+                          key={`mobile-${product.categorySlug}-${product.slug}`}
+                          href={`/urunler/${product.categorySlug}/${product.slug}`}
+                          onClick={closeMenu}
+                          className="group flex items-center justify-between gap-3 border-b border-white/5 px-4 py-3.5 transition last:border-none hover:bg-white/[0.04]"
+                        >
+                          <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold text-white">{product.name}</p>
+                            <p className="mt-1 truncate text-xs text-zinc-500">{product.categoryName}</p>
+                          </div>
+                          <ArrowUpRight className="shrink-0 text-[#D4AF37]" size={16} />
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
             <nav className="flex flex-col">
               {menuItems.map((item) => {
                 const Icon = item.icon;

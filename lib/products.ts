@@ -8,9 +8,9 @@ const item = (slug: string, name: string, brand = "M&Y Kozmetik", image?: string
 
 export const productCategories: ProductCategory[] = [
   { slug: "agda", name: "Ağda", description: "Profesyonel ağda uygulamaları için kartuş, kalıp ve konserve ağda çeşitleri.", products: [
-    item("kartus-agda", "Kartuş Ağda"),
-    item("kalip-agda", "Kalıp Ağda"),
-    item("konserve-agda", "Konserve Ağda"),
+    item("kartus-agda", "Kartuş Ağda", "M&Y Kozmetik", "/products/my-kartus-agda-azulen.png"),
+    item("kalip-agda", "Kalıp Ağda", "M&Y Kozmetik", "/products/my-kalip-agda-azulen.png"),
+    item("konserve-agda", "Konserve Ağda", "M&Y Kozmetik", "/products/my-konserve-agda-azulen.png"),
   ] },
   { slug: "agda-ekipmanlari", name: "Ağda Ekipmanları", description: "Ağda uygulamalarını tamamlayan profesyonel ekipman ve yardımcı ürünler.", products: [
     item("agda-yagi", "Ağda Yağı"),
